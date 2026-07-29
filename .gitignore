@@ -1,0 +1,6 @@
+# Ignore everything at the repository root...
+/*
+
+# ...except the source tree and this file
+!/.gitignore
+!/src/
