@@ -1082,8 +1082,13 @@ int main(int argc, char *argv[])
 
     /* Hand the machine back to the system browser. LoadExecPS2 resets the IOP
        itself, so the modules this app loaded (audsrv, MCSERV, PADMAN...) go
-       away with it and nothing needs tearing down here first. */
-    LoadExecPS2("rom0:OSDSYS", 0, NULL);
+       away with it and nothing needs tearing down here first.
+       Passing argc=0 makes OSDSYS resume on the last-launched icon (the
+       memory card slot this ELF booted from) instead of the main browser.
+       Passing argv[0]="rom0:OSDSYS" with argc=1 forces it back to the
+       default browser/CLOCK page. */
+    static char *osdsys_argv[1] = { "rom0:OSDSYS" };
+    LoadExecPS2("rom0:OSDSYS", 1, osdsys_argv);
 
     return 0;
 }
